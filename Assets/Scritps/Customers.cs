@@ -4,38 +4,34 @@ using UnityEngine;
 
 public class Customers : MonoBehaviour
 {
-    public float customerSpeed = 2.0f;
-    public float interactDistance = 0.25f;
+    private float customerSpeed = 2.0f;
+    public float CustomerSpeed => customerSpeed;
+    private MeshRenderer mesh;
+    public GameObject startPos;
+    public GameObject endPos;
 
-    public GameObject startObj;
-    public GameObject endObj;
-    private Vector3 startPos;
+    private StateMachine stateMachine;
+    public StateMachine StateMachine => stateMachine;
+
+    private void Awake()
+    {
+        mesh = GetComponentInChildren<MeshRenderer>();
+        stateMachine = new StateMachine(this);
+
+    }
 
     void Start()
     {
-        startPos = startObj.transform.position;
-        startPos.y += .60f;
-        transform.position = startPos;
-
-
+        stateMachine.Initialize(stateMachine.WaitingState);
     }
 
     void Update()
     {
-        MoveToEnd();
+        stateMachine.Update();
     }
 
-    public void MoveToEnd()
+    public void ChangeColor(Color color)
     {
-        Vector3 endPos;
-        endPos = endObj.transform.position;
-        endPos.y += .60f;
-
-        transform.position = Vector3.MoveTowards(transform.position, endPos, customerSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, endPos) < interactDistance)
-        {
-            Destroy(gameObject);
-        }
+        mesh.material.color = color;
     }
 }

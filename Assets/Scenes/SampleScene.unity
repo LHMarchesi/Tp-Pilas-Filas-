@@ -690,7 +690,7 @@ MonoBehaviour:
   customerSpeed: 1
   interactDistance: 0.25
   startObj: {fileID: 13813}
-  targetObj: {fileID: 1093482703}
+  endObj: {fileID: 1093482703}
 --- !u!1 &1898780348
 GameObject:
   m_ObjectHideFlags: 0
