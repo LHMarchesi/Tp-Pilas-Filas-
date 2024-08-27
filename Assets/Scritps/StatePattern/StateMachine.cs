@@ -12,12 +12,14 @@ public class StateMachine
     public WaitingState waitingState;
     public BuyingState buyingState;
     public WalkingOutState walkingOutState;
+    public GoingState goingState;
 
     public StateMachine(Customers customer)
     {
         waitingState = new WaitingState(customer);
         buyingState = new BuyingState(customer);
         walkingOutState = new WalkingOutState(customer);
+        goingState = new GoingState(customer);
     }
 
     public void Initialize(IState state)

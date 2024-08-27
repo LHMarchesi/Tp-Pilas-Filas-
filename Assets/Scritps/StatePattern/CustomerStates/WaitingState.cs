@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,29 +19,28 @@ public class WaitingState : IState
         customerManager = GameObject.FindAnyObjectByType<CustomerManager>();
     }
 
-    
+
     public void Update()
     {
-        //Logica para la cola de customers
-        MoveToStart();
+        OnWaiting(SectionManager.instance.GetRandomSection());
     }
 
-    public void MoveToStart()
+    private void OnWaiting(GameObject container) // Espera que haya un container por pickear
     {
-        //if (customerManager.customerQeue.Peek() == customer)
-        //{
-            Vector3 startPos;
-            startPos = customer.StartPos.transform.position;
-            startPos.y += .60f;
-
-            customer.transform.position = Vector3.MoveTowards(customer.transform.position, startPos, customer.CustomerSpeed * Time.deltaTime);
-
-            if (Vector3.Distance(customer.transform.position, startPos) < customer.InteractDistance)
-            {
-                customer.StateMachine.TransitionTo(customer.StateMachine.buyingState);
-            }
-        //}
+        if (container != null)
+        {
+            customer.StateMachine.TransitionTo(customer.StateMachine.buyingState);
+        }
+        else
+        {
+            Vector3 waitingPos;
+            waitingPos = customer.WaitingPos.transform.position;
+            waitingPos.y += .60f;
+            customer.transform.position = Vector3.MoveTowards(customer.transform.position, waitingPos, customer.CustomerSpeed * Time.deltaTime); // Lo manda a la posicion de espera
+        }
     }
 
     public void Exit() { }
+
+
 }

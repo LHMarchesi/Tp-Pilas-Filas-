@@ -16,12 +16,14 @@ public class SectionManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private Vector3 startPosition;
-    private Vector3 offset = new Vector3(1.5f, 0, 0);
-    private List<GameObject> sectionList = new List<GameObject>();
+
+    public List<GameObject> SectionList => sectionList;
     [SerializeField] private GameObject sectionObj;
     [SerializeField] private int totalSections;
-    public List<GameObject> SectionList => sectionList;
+
+    private List<GameObject> sectionList = new List<GameObject>();
+    private Vector3 startPosition;
+    private Vector3 offset = new Vector3(1.5f, 0, 0);
 
     void Start()
     {

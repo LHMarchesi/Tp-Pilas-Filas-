@@ -22,7 +22,7 @@ public class BuyingState : IState
         MoveCustomerTowardsObj(customer, SectionManager.instance.GetRandomSection());
     }
 
-    public void MoveCustomerTowardsObj(Customers customer, GameObject obj)
+    public void MoveCustomerTowardsObj(Customers customer, GameObject obj) // Mueve el Npc al container disponible  
     {
         if (obj != null)
         {
@@ -42,6 +42,10 @@ public class BuyingState : IState
                     customer.StateMachine.TransitionTo(customer.StateMachine.walkingOutState);
                 }
             }
+        }
+        else
+        {
+            customer.StateMachine.TransitionTo(customer.StateMachine.waitingState);
         }
     }
     public void Exit() { }

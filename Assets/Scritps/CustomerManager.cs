@@ -30,11 +30,11 @@ public class CustomerManager : MonoBehaviour
         {
             GameObject item = Instantiate(customer, spawnPos, Quaternion.identity);
             customerQeue.Push(item);
-            //MoveTowardsLastCustomer(item);
+            
         }
     }
 
-    public void MoveTowardsLastCustomer(GameObject item)
+    public void MoveTowardsPosition(GameObject item)
     {
         GameObject lastCustomer = customerQeue.Peek();
         Customers customerScript = item.GetComponent<Customers>();
@@ -44,6 +44,7 @@ public class CustomerManager : MonoBehaviour
 
     }
 
+    public int GetCustomerCount() {  return customerQeue.Count; }
 
 
 }
