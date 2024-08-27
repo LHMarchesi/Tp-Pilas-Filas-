@@ -11,6 +11,10 @@ public class Customers : MonoBehaviour
     public float InteractDistance => interactDistance;
     public StateMachine StateMachine => stateMachine;
 
+    [SerializeField] private GameObject endPos;
+    public GameObject EndPos => endPos;
+
+
     private MeshRenderer mesh;
 
     private void Awake()
