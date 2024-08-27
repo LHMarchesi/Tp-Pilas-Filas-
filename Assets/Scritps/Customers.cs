@@ -22,7 +22,7 @@ public class Customers : MonoBehaviour
 
     void Start()
     {
-        stateMachine.Initialize(stateMachine.WaitingState);
+        stateMachine.Initialize(stateMachine.waitingState);
     }
 
     void Update()

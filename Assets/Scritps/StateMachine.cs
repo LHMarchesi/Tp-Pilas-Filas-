@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class StateMachine 
+public class StateMachine
 {
     private IState currentState;
     public IState CurrentState => currentState;
 
-    public WaitingState waiting;
-    //public BuyingState buying;
-    //public WalkingOutState walkingOut;
+    public WaitingState waitingState;
+    public BuyingState buyingState;
+    public WalkingOutState walkingOutState;
 
     public StateMachine(Customers customer)
     {
-        waiting = new WaitingState(customer);
-        //buying = new BuyingState(customer);
-        //walkingOut = new WalkingOutState(customer);
+        waitingState = new WaitingState(customer);
+        buyingState = new BuyingState(customer);
+        walkingOutState = new WalkingOutState(customer);
     }
 
     public void Initialize(IState state)
@@ -36,7 +36,7 @@ public class StateMachine
 
     public void Update()
     {
-        if(currentState !=null)
+        if (currentState != null)
         {
             currentState.Update();
         }

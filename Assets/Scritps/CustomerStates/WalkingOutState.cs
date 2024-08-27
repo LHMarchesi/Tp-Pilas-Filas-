@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class WalkingOutState : IState
 {
-    // Start is called before the first frame update
-    void Start()
+    private Customers customer;
+
+    public WalkingOutState(Customers customer)
     {
-        
+        this.customer = customer;
     }
 
-    // Update is called once per frame
+    public void Enter()
+    {
+        customer.ChangeColor(Color.red);
+    }
+
     void Update()
     {
-        
+        //Logica para la ir al final y destruirse
     }
+
+    public void Exit() { }
 
     //public void MoveToEnd()
     //{

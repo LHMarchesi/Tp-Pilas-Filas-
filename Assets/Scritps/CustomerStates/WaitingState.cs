@@ -20,4 +20,6 @@ public class WaitingState : IState
     {
         //Logica para la cola de customers
     }
+
+    public void Exit() { }
 }
