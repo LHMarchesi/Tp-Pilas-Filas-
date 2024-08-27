@@ -5,11 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Container
-  - Container1
-  - Container2
-  - Container3
-  - Container4
-  - Container5
+  - EndPos
+  - StartPos
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,9 @@ public class Customers : MonoBehaviour
     [SerializeField] private GameObject endPos;
     public GameObject EndPos => endPos;
 
+     [SerializeField] private GameObject startPos;
+    public GameObject StartPos => startPos;
+
 
     private MeshRenderer mesh;
 
@@ -21,11 +24,13 @@ public class Customers : MonoBehaviour
     {
         mesh = GetComponentInChildren<MeshRenderer>();
         stateMachine = new StateMachine(this);
+        endPos = GameObject.FindWithTag("EndPos");
+        startPos = GameObject.FindWithTag("StartPos");
     }
 
     private void Start()
     {
-        stateMachine.Initialize(stateMachine.buyingState);
+        stateMachine.Initialize(stateMachine.waitingState);
     }
 
     private void Update()
