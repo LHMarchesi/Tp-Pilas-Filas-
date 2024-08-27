@@ -9,6 +9,7 @@ public class ContainerManager : MonoBehaviour
     private Stack<GameObject> containerStack = new Stack<GameObject>();
     private Vector3 startPosition;
     private Vector3 offset = new Vector3(0, 0, .1f);
+    public Stack<GameObject> ContainerStack => containerStack;
 
     private void Start()
     {

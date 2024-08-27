@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static System.Collections.Specialized.BitVector32;
 
 public class BuyingState : IState
 {
@@ -13,13 +14,35 @@ public class BuyingState : IState
 
     public void Enter()
     {
-        customer.ChangeColor(Color.red);
+        customer.ChangeColor(Color.blue);
     }
 
-    void Update()
+    public void Update()
     {
-        //Logica para buscar un item
+        MoveCustomerTowardsObj(customer, SectionManager.instance.GetRandomSection());
     }
 
+    public void MoveCustomerTowardsObj(Customers customer, GameObject obj)
+    {
+        if (obj != null)
+        {
+            ContainerManager objScript = obj.GetComponent<ContainerManager>();
+            if (objScript.ContainerStack.Count > 0)
+            {
+                Vector3 endPos;
+                endPos = obj.transform.position;
+                endPos.y += .60f;
+
+                customer.transform.position = Vector3.MoveTowards(customer.transform.position, endPos, customer.CustomerSpeed * Time.deltaTime);
+
+                if (Vector3.Distance(customer.transform.position, endPos) < customer.InteractDistance)
+                {
+
+                    objScript.ContainerRest();
+                    customer.StateMachine.TransitionTo(customer.StateMachine.walkingOutState);
+                }
+            }
+        }
+    }
     public void Exit() { }
 }

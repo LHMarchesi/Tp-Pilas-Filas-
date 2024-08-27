@@ -4,28 +4,27 @@ using UnityEngine;
 
 public class Customers : MonoBehaviour
 {
-    private float customerSpeed = 2.0f;
-    public float CustomerSpeed => customerSpeed;
-    private MeshRenderer mesh;
-    public GameObject startPos;
-    public GameObject endPos;
-
     private StateMachine stateMachine;
+    private float customerSpeed = 2.0f;
+    private float interactDistance = 0.01f;
+    public float CustomerSpeed => customerSpeed;
+    public float InteractDistance => interactDistance;
     public StateMachine StateMachine => stateMachine;
+
+    private MeshRenderer mesh;
 
     private void Awake()
     {
         mesh = GetComponentInChildren<MeshRenderer>();
         stateMachine = new StateMachine(this);
-
     }
 
-    void Start()
+    private void Start()
     {
-        stateMachine.Initialize(stateMachine.waitingState);
+        stateMachine.Initialize(stateMachine.buyingState);
     }
 
-    void Update()
+    private void Update()
     {
         stateMachine.Update();
     }

@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class SectionManager : MonoBehaviour
 {
-    [SerializeField] private GameObject sectionObj;
-    [SerializeField] private int totalSections;
-    private List<GameObject> SectionList = new List<GameObject>();
+    public static SectionManager instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private Vector3 startPosition;
     private Vector3 offset = new Vector3(1.5f, 0, 0);
+    private List<GameObject> sectionList = new List<GameObject>();
+    [SerializeField] private GameObject sectionObj;
+    [SerializeField] private int totalSections;
+    public List<GameObject> SectionList => sectionList;
 
     void Start()
     {
@@ -20,5 +33,26 @@ public class SectionManager : MonoBehaviour
                 GameObject item = Instantiate(sectionObj, newPos, Quaternion.identity, this.transform);
                 SectionList.Add(item);
         }
+    }
+
+    public GameObject GetRandomSection() // Toma una seccion random disponible
+    {
+        List<GameObject> nonEmptySections = new List<GameObject>();
+
+        foreach (GameObject section in SectionList)
+        {
+            ContainerManager containerManager = section.GetComponent<ContainerManager>();
+            if (containerManager.ContainerStack.Count > 0)
+            {
+                nonEmptySections.Add(section);
+            }
+        }
+
+        if (nonEmptySections.Count == 0)
+        {
+            return null;
+        }
+        int randomIndex = Random.Range(0, nonEmptySections.Count);
+        return nonEmptySections[randomIndex];
     }
 }
